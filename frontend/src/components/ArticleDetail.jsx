@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { useLocation, useNavigate, useParams } from 'react-router-dom'
-import axios from 'axios'
+import axios from 'axios';
+import API_BASE from '../config/api';
 import { cardClass, pageTitleClass, bodyText, primaryBtn, timestampClass, tagClass, divider, articlePageWrapper } from '../styles/common'
 
 function ArticleDetail() {
@@ -15,7 +16,7 @@ function ArticleDetail() {
         const fetchArticle = async () => {
             setLoading(true)
             try {
-                const res = await axios.get(`http://localhost:4000/common-api/articles/${id}`, { withCredentials: true })
+                const res = await axios.get(`${API_BASE}/common-api/articles/${id}`, { withCredentials: true })
                 console.log("Fetch success - Payload:", res.data.payload)
                 setArticle(res.data.payload)
             } catch (err) {
