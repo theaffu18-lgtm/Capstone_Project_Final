@@ -1,5 +1,5 @@
 import exp from 'express'
-import { UserTypeModel } from '../models/UserModel.js'
+import { UserTypeModel } from '../models/userModel.js';
 import { verifyToken } from '../middleware/verifyToken.js'
 import { checkAdmin } from '../middleware/checkAdmin.js'
 

@@ -1,4 +1,4 @@
-import { UserTypeModel } from "../models/UserModel.js";
+import { UserTypeModel } from "../models/userModel.js";
 
 export const checkAuthor = async (req, res, next) => {
   //get author id

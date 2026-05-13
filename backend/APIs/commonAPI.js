@@ -1,6 +1,6 @@
 import exp from 'express'
 import { authenticate } from '../services/authService.js';
-import { UserTypeModel } from '../models/UserModel.js';
+import { UserTypeModel } from '../models/userModel.js';
 import bcrypt from 'bcryptjs';
 export const commonRouter=exp.Router()
 import rateLimit from "express-rate-limit";
