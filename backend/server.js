@@ -13,7 +13,7 @@ config(); //process.env
 //Create express application
 const app = exp();
 app.use(cors({
-  origin: ["http://localhost:5173"],
+  origin: ["https://blog-app-alpha-lyart.vercel.app/","http://localhost:5173"],
   credentials: true
 }));
 //add body parser middleware
