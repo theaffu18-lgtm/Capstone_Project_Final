@@ -1,0 +1,106 @@
+POST http://localhost:4000/user-api/users
+Content-Type: application/json
+
+{
+    "firstName":"bhavani",
+    "lastName":"merugu",
+    "email":"merugu@gmail.com",
+    "password":"password"
+}
+
+
+###register author
+POST http://localhost:4000/author-api/users
+Content-Type: application/json
+
+{  
+    "firstName":"harishhh",
+    "lastName":"kumar",
+    "email":"harish1@gmail.com",
+    "password":"123456"
+
+}
+
+###authenticate author
+POST http://localhost:4000/common-api/login
+Content-Type: application/json
+
+{
+    "email":"24eg505k15@anurag.edu.in",
+    "password":"@hari123"
+}
+
+
+###create artcles
+POST http://localhost:4000/author-api/articles
+Content-Type: application/json
+
+{
+    "author":"69c39fb249d35585d28652cf",
+    "title":"Education In India",
+    "category":"Education",
+    "content":"Education plays a crucial role in the development of any nation, and in India it has always been regarded as a powerful tool for social, economic, and cultural progress. India has one of the largest education systems in the world, with millions of students enrolled in schools, colleges, and universities across the country. The importance of education in India has been recognized since ancient times, when renowned centers of learning such as Takshashila and Nalanda attracted students from different parts of the world. Over the centuries, the education system in India has evolved significantly, adapting to changing social needs and technological advancements.In modern India, education is considered a fundamental right for children. The government has taken several initiatives to improve access to education and increase literacy rates across the country. Programs such as the Right to Education Act ensure that children between the ages of six and fourteen receive free and compulsory education. This has helped millions of children from rural and economically weaker backgrounds gain access to schooling. Education empowers individuals with knowledge, skills, and the confidence required to participate actively in society."
+}
+
+###update articles
+PUT http://localhost:4000/author-api/articles
+Content-Type: application/json
+
+{    
+    "articleId":"69c3a6b549d35585d286534d",
+    "author":"69c39fb249d35585d28652cf",
+    "title":"Java programing",
+    "category":"Programming",
+    "content":"Java is programming language"
+
+}
+
+
+###get article by id
+GET http://localhost:4000/author-api/article/6a015423da5c32bdeab52e11
+
+###logout
+GET http://localhost:4000/common-api/logout
+
+###get articles
+GET http://localhost:4000/user-api/articles
+
+
+###isArticleActive to false
+PUT http://localhost:4000/author-api/articles/698a9cf77bdf8206c9aa12f9/status
+
+
+
+
+###test request
+GET http://localhost:4000/test
+
+
+###blocking and unblocking of user by admin
+PUT http://localhost:4000/admin-api/unblock/698a9cc27bdf8206c9aa12f5
+
+###changing the password
+PUT http://localhost:4000/common-api/change-password
+Content-Type: application/json
+
+{
+    "userID":"6999ca422bdae00edb7338ef",
+    "email":"merugu@gmail.com",
+    "currentPassword":"password",
+    "newPassword":"password123"
+}
+
+
+###read all articles 
+GET http://localhost:4000/user-api/articles
+
+###add comment to article
+POST http://localhost:4000/user-api/articles
+Content-Type: application/json
+
+{   "user":"69aef4a9a85d8f90eb532470",
+    "articleId":"69aef5eda85d8f90eb532484",
+    "comment":"good article"
+}
+###login user
+
