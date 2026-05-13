@@ -1,6 +1,7 @@
 import { create } from 'zustand'
 import axios from 'axios'
 import API_BASE from '../config/api'
+axios.defaults.withCredentials = true;
 
 export let useAuth = create((set) => ({
     currentUser: null,

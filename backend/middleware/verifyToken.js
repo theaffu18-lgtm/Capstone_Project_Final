@@ -12,6 +12,7 @@ export const verifyToken = (...allowedRoles) => {
       // read token from cookies
       let token = req.cookies.token;
       console.log("token:", token);
+      console.log(req.cookies);
 
       if (!token) {
         return res.status(401).json({ message: "Unauthorized request. Please login." });

@@ -25,6 +25,7 @@ commonRouter.post('/login',async(req,res)=>
     httpOnly: true,
     sameSite: "None",
     secure: false,
+    maxAge: 24 * 60 * 60 * 1000,// 1 day
   });
   //send res
   res.status(200).json({ message: "login success", payload: user });
