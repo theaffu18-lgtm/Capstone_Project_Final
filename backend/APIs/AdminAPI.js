@@ -2,38 +2,11 @@ import exp from 'express'
 import { UserTypeModel } from '../models/userModel.js';
 import { verifyToken } from '../middleware/verifyToken.js'
 import { checkAdmin } from '../middleware/checkAdmin.js'
-
-export const adminRoute = exp.Router()
-
-import exp from "express";
 import { register, authenticate } from "../services/authService.js";
 
 export const adminRoute = exp.Router();
 
 
-// Register Admin
-adminRoute.post("/register", async (req, res, next) => {
-
-  try {
-
-    const adminObj = req.body;
-
-    const newAdmin = await register({
-      ...adminObj,
-      role: "ADMIN"
-    });
-
-    res.status(201).json({
-      message: "Admin created successfully",
-      payload: newAdmin
-    });
-
-  } catch (err) {
-
-    next(err);
-
-  }
-});
 
 
 // Login Admin
@@ -75,8 +48,62 @@ adminRoute.post("/login", async (req, res, next) => {
   }
 });
 
+adminRoute.get("/stats", async (req, res) => {
+
+  try {
+
+    const totalUsers = await UserTypeModel.countDocuments({
+      role: "USER"
+    });
+
+    const totalAuthors = await UserTypeModel.countDocuments({
+      role: "AUTHOR"
+    });
+
+    const totalAdmins = await UserTypeModel.countDocuments({
+      role: "ADMIN"
+    });
+
+    res.status(200).json({
+      totalUsers,
+      totalAuthors,
+      totalAdmins
+    });
+
+  } catch (error) {
+
+    res.status(500).json({
+      message: error.message
+    });
+
+  }
+
+});
+
+adminRoute.get("/users", async (req, res) => {
+
+  try {
+
+    const users = await UserTypeModel.find({
+      role: { $in: ["USER", "AUTHOR"] }
+    }).select("-password");
+
+    res.status(200).json({
+      payload: users
+    });
+
+  } catch (error) {
+
+    res.status(500).json({
+      message: error.message
+    });
+
+  }
+
+});
+
 // Block User
-adminRoute.put('/block/:userId', verifyToken, checkAdmin, async (req, res) => {
+adminRoute.put('/block/:userId', verifyToken(), checkAdmin, async (req, res) => {
   try {
     const userID = req.params.userId
 
@@ -107,7 +134,7 @@ adminRoute.put('/block/:userId', verifyToken, checkAdmin, async (req, res) => {
 
 
 // Unblock User
-adminRoute.put('/unblock/:userId', verifyToken, checkAdmin, async (req, res) => {
+adminRoute.put('/unblock/:userId', verifyToken(), checkAdmin, async (req, res) => {
   try {
     const userID = req.params.userId
 
@@ -117,7 +144,7 @@ adminRoute.put('/unblock/:userId', verifyToken, checkAdmin, async (req, res) => 
     }
 
     if (user.isActive) {
-      return res.status(400).json({ message: "User already active" })
+      return res.status(400).json({ message: "User already unblocked" })
     }
 
     const updatedUser = await UserTypeModel.findByIdAndUpdate(
