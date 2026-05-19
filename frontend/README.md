@@ -1,16 +1,215 @@
-# React + Vite
+# 🎨 Frontend - Capstone Project Final
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## ⚛️ React.js + Vite Frontend
 
-Currently, two official plugins are available:
+Frontend application for the MERN Stack Blogging Platform with 🔐 authentication, 👨‍💻 role-based dashboards, ☁️ profile image uploads, and 📚 article management.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+---
 
-## React Compiler
+# 🌟 Features
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- ✅ Modern Responsive UI
+- ✅ User Authentication
+- ✅ Role-Based Dashboard
+- ✅ Protected Routes
+- ✅ Article Management
+- ✅ Admin Panel
+- ✅ Profile Image Upload
+- ✅ Toast Notifications
 
-## Expanding the ESLint configuration
+---
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+# 🛠️ Tech Stack
+
+- ⚛️ React.js
+- ⚡ Vite
+- 🌐 Axios
+- 🧭 React Router DOM
+- 🎨 Tailwind CSS
+- 🔔 React Hot Toast
+
+---
+
+# 📁 Folder Structure
+
+```bash
+frontend/
+│
+├── public/
+├── src/
+│   ├── components/
+│   ├── config/
+│   ├── styles/
+│   ├── assets/
+│   └── App.jsx
+│
+├── vite.config.js
+├── package.json
+└── .env
+```
+
+---
+
+# ⚙️ Installation
+
+## 📦 Install Dependencies
+
+```bash
+npm install
+```
+
+---
+
+# 🔑 Environment Variables
+
+Create a `.env` file inside frontend folder.
+
+```env
+VITE_API_URL=http://localhost:4000
+```
+
+---
+
+# ▶️ Run Frontend
+
+```bash
+npm run dev
+```
+
+✅ Frontend runs on:
+
+```bash
+http://localhost:5173
+```
+
+---
+
+# 👥 User Roles
+
+## 👤 USER
+- 📖 Read Articles
+- 💬 Comment on Articles
+- 🖼️ Upload Profile Picture
+
+---
+
+## ✍️ AUTHOR
+- ➕ Create Articles
+- ✏️ Edit Articles
+- ❌ Delete Articles
+- 📚 Manage Own Articles
+
+---
+
+## 👑 ADMIN
+- 👀 View Users
+- 👀 View Authors
+- 🚫 Block Users
+- ✅ Unblock Users
+- 📊 View Dashboard Statistics
+
+---
+
+# 🧭 Routing System
+
+Protected routes based on roles:
+
+```bash
+/userdashboard
+/authordashboard
+/admindashboard
+```
+
+---
+
+# 📸 Media Features
+
+- ✅ Profile Picture Upload
+- ✅ Article Image Upload
+- ✅ Cloudinary Integration
+- ✅ Multer Backend Support
+
+---
+
+# 🔗 API Integration
+
+Frontend communicates with backend APIs using Axios.
+
+Example:
+
+```javascript
+axios.get(`${import.meta.env.VITE_API_URL}/admin-api/users`)
+```
+
+---
+
+# 📚 Main Components
+
+- 🏠 Home
+- 🔐 Login
+- 📝 Register
+- 👤 UserProfile
+- ✍️ AuthorProfile
+- 👑 AdminProfile
+- ➕ AddArticle
+- ✏️ EditArticle
+- 📖 ArticleDetail
+- 🚫 Unauthorized
+- 🛡️ ProtectedRoute
+
+---
+
+# 🎨 UI Features
+
+- ✅ Responsive Design
+- ✅ Dynamic Rendering
+- ✅ Dashboard Navigation
+- ✅ Toast Notifications
+- ✅ Clean User Interface
+- ✅ Interactive Components
+
+---
+
+# ☁️ Deployment
+
+## 🚀 Deploy Frontend on Vercel
+
+### 📂 Root Directory
+
+```bash
+frontend
+```
+
+### 📦 Build Command
+
+```bash
+npm run build
+```
+
+### 📁 Output Directory
+
+```bash
+dist
+```
+
+---
+
+# 🔥 Future Improvements
+
+- 🌙 Dark Mode
+- 🔍 Search Functionality
+- ❤️ Like System
+- 🔖 Bookmark Feature
+- 🔔 Notifications
+- 💬 Real-time Chat
+- 🤖 AI Content Suggestions
+
+---
+
+# 👨‍💻 Developed By
+
+## ❤️ Mohammad Afthab
+
+- 🎓 CSE Student
+- 💻 MERN Stack Developer
+- 🚀 Passionate About Frontend Development
