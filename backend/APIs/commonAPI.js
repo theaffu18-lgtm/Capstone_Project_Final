@@ -69,10 +69,17 @@ res.status(200).json({message:"password updated succesfully",payload:userDB})
 })
 
 //route to handlle page refresh 
-commonRouter.get("/check-auth",verifyToken("USER","AUTHOR","ADMIN"),(req,res)=>
-{
-  console.log("req.user",req.data)
+commonRouter.get(
+  "/check-auth",
+  verifyToken("USER", "AUTHOR", "ADMIN"),
+  (req, res) => {
 
-  res.status(200).json({message:"authenticated",payload:req.user})
-})
+    console.log("req.data", req.data);
 
+    res.status(200).json({
+      message: "authenticated",
+      payload: req.data
+    });
+
+  }
+);
