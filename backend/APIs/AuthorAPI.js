@@ -112,7 +112,7 @@ authorRoute.put("/articles",verifyToken("AUTHOR") ,checkAuthor,async (req, res) 
 
 // get author from token (secure way)
 const userId = req.user.userId;
-console.log("User id",req.user._id)
+console.log("User id",req.user.userId)
 
 
 let articleOfDB = await ArticleModel.findOne({
