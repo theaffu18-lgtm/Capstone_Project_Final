@@ -111,8 +111,8 @@ authorRoute.put("/articles",verifyToken("AUTHOR") ,checkAuthor,async (req, res) 
   let { articleId, title, category, content } = req.body;
 
 // get author from token (secure way)
-const userId = req.user.userId;
-console.log("User id",req.user.userId)
+const userId = req.user._id;
+console.log("User id",req.user._id)
 
 
 let articleOfDB = await ArticleModel.findOne({
@@ -148,10 +148,10 @@ authorRoute.patch("/articles/:id/status", verifyToken("AUTHOR"), async (req, res
     return res.status(404).json({ message: "Article not found" });
   }
 
-  //console.log(req.user.userId,article.author.toString())
+  //console.log(req.user._id,article.author.toString())
   // AUTHOR can only modify their own articles
   if (req.user.role === "AUTHOR" && 
-    article.author.toString() !== req.user.userId) {
+    article.author.toString() !== req.user._id) {
     return res
     .status(403)
     .json({ message: "Forbidden. You can only modify your own articles" });

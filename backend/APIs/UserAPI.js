@@ -83,7 +83,7 @@ userRoute.put("/articles", verifyToken("USER"), async (req, res) => {
   //check user(req.user)
   console.log("Userreq",req.body);
   console.log("userId",userId);
-  if (userId !== req.user.userId) {
+  if (userId !== req.user._id) {
     
     return res.status(403).json({ message: "Forbidden" });
   }

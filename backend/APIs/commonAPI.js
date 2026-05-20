@@ -78,7 +78,7 @@ commonRouter.get(
 
     res.status(200).json({
       message: "authenticated",
-      payload: req.data
+      payload: req.user
     });
 
   }
