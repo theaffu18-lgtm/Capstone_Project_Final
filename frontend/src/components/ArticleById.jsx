@@ -181,7 +181,7 @@ function ArticleByID() {
 
       <div className={articleContent}>{article.content}</div>
 
-      {user?.role === "AUTHOR" && String(article.author?._id || article.author) === String(user._id) && (
+      {user?.role === "AUTHOR" && (
         <div className={articleActions + " border-y border-[#e8e8ed] py-10"}>
           <button className={editBtn} onClick={() => editArticle(article)}>
             Modify Story
