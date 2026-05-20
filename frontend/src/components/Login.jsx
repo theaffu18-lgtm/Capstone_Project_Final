@@ -20,7 +20,7 @@ function Login() {
   // funciton from store
   const login = useAuth(state => state.login)
   const currentUser = useAuth(state => state.currentUser)
-  const isAuthenticated = useAuth(state => state.isAuthenticated)
+  const loading = useAuth(state => state.loading)
   const error = useAuth(state => state.error)
 
   const onLogin = async (userLoginObj) => {
@@ -38,16 +38,26 @@ function Login() {
 
   // Redirect after successful login or if already authenticated
   React.useEffect(() => {
-    if (isAuthenticated && currentUser && currentUser.role) {
-      if (currentUser.role === "USER") {
-        navigate('/userdashboard')
-      } else if (currentUser.role === "AUTHOR") {
-        navigate('/authordashboard')
-      } else if (currentUser.role === "ADMIN") {
-        navigate('/admindashboard')
-      }
+
+  if (!loading && currentUser?.role) {
+
+    if (currentUser.role === "USER") {
+
+      navigate("/userdashboard");
+
+    } else if (currentUser.role === "AUTHOR") {
+
+      navigate("/authordashboard");
+
+    } else if (currentUser.role === "ADMIN") {
+
+      navigate("/admindashboard");
+
     }
-  }, [isAuthenticated, currentUser, navigate])
+
+  }
+
+}, [loading, currentUser, navigate]);
 
   return (
     <div className="flex items-center justify-center min-h-[70vh]">
