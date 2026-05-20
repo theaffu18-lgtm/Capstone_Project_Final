@@ -13,7 +13,7 @@ function RootLayout() {
   //call the auth
   useEffect(() =>{
     checkAuth()
-  }, [checkAuth])
+  }, []);
 
   if(loading){
     return <p className= {loadingClass}>Loading...</p>
