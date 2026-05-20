@@ -181,18 +181,21 @@ function ArticleByID() {
 
       <div className={articleContent}>{article.content}</div>
 
-      {user?.role === "AUTHOR" && (
-        <div className={articleActions + " border-y border-[#e8e8ed] py-10"}>
-          <button className={editBtn} onClick={() => editArticle(article)}>
-            Modify Story
-          </button>
-          <button className={deleteBtn} onClick={toggleArticleStatus}>
-            {article.isArticleActive ? "Archive Publication" : "Restore Publication"}
-          </button>
-        </div>
-      )}
+      {user && (
+  <div className={articleActions + " border-y border-[#e8e8ed] py-10"}>
+    <button className={editBtn} onClick={() => editArticle(article)}>
+      Modify Story
+    </button>
 
-      {["USER", "AUTHOR", "ADMIN"].includes(user?.role) && (
+    <button className={deleteBtn} onClick={toggleArticleStatus}>
+      {article.isArticleActive
+        ? "Archive Publication"
+        : "Restore Publication"}
+    </button>
+  </div>
+)}
+
+      {user && (
         <div className="mt-16 bg-[#f5f5f7] rounded-3xl p-10 border border-[#e8e8ed]">
           <h3 className={headingClass + " mb-8"}>Community Insight</h3>
 
