@@ -34,7 +34,10 @@ function EditArticle() {
         if (!article) {
             const fetchArticle = async () => {
                 try {
-                    const res = await axios.get(`${API_BASE}/common-api/articles/${id}`, { withCredentials: true })
+                    const res = await axios.get(
+                    `${API_BASE}/author-api/article/${id}`,
+                      { withCredentials: true }
+                       )
                     setArticle(res.data.payload)
                 } catch (err) {
                     toast.error("Failed to load article")

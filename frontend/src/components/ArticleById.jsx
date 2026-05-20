@@ -72,23 +72,37 @@ function ArticleByID() {
   };
 
   const toggleArticleStatus = async () => {
-    const newStatus = !article.isArticleActive;
-    const confirmMsg = newStatus ? "Restore this article?" : "Delete this article?";
-    if (!window.confirm(confirmMsg)) return;
 
-    try {
-      const res = await axios.patch(
-        `${API_BASE}/author-api/articles/${id}/status`,
-        { isArticleActive: newStatus },
-        { withCredentials: true },
-      );
-      setArticle(res.data.article || res.data.payload);
-      toast.success(res.data.message);
-    } catch (err) {
-      toast.error(err.response?.data?.message || "Operation failed");
-    }
-  };
-  
+  const newStatus = !article.isArticleActive;
+
+  const confirmMsg = newStatus
+    ? "Restore this article?"
+    : "Delete this article?";
+
+  if (!window.confirm(confirmMsg)) return;
+
+  try {
+
+    const res = await axios.patch(
+      `${API_BASE}/author-api/articles/${id}/status`,
+      { isArticleActive: newStatus },
+      { withCredentials: true }
+    );
+
+    toast.success(res.data.message);
+
+    // refresh latest article from backend
+    await refreshArticle();
+
+  } catch (err) {
+
+    toast.error(
+      err.response?.data?.message || "Operation failed"
+    );
+
+  }
+
+};
   const editArticle = (articleObj) => {
     navigate(`/edit-article/${id}`, { state: articleObj });
   };
@@ -205,7 +219,7 @@ function ArticleByID() {
           )}
           
 
-          {["USER", "user", "User"].includes(user?.role) && (
+          {["USER", "AUTHOR", "ADMIN"].includes(user?.role) && (
   <form onSubmit={addComment} className="mt-12 space-y-4">
 
     <textarea

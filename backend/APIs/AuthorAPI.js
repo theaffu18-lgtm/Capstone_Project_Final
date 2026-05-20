@@ -55,7 +55,7 @@ authorRoute.post("/articles",verifyToken("AUTHOR") , async (req, res) => {
   //get article from req
   let article = req.body;
   console.log("Article data", req.user);
-  article.author = req.user._id;
+  article.author = req.user.userId;
 
   //create article document
   let newArticleDoc = new ArticleModel(article);
