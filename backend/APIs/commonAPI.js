@@ -73,9 +73,7 @@ commonRouter.get(
   "/check-auth",
   verifyToken("USER", "AUTHOR", "ADMIN"),
   (req, res) => {
-
-    console.log("req.data", req.data);
-
+    
     res.status(200).json({
       message: "authenticated",
       payload: req.user

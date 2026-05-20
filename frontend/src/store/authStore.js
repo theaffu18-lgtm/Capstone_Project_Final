@@ -1,119 +1,110 @@
-import { create } from 'zustand'
-import axios from 'axios'
-import API_BASE from '../config/api'
+import { create } from "zustand";
+import axios from "axios";
+import API_BASE from "../config/api";
 
 axios.defaults.withCredentials = true;
 
-export let useAuth = create((set) => ({
+export const useAuth = create((set) => ({
 
-    currentUser: null,
-    isAuthenticated: false,
-    loading: true,
-    error: null,
+  currentUser: null,
+  loading: true,
+  error: null,
 
-    // LOGIN
-    login: async (userCredObjWithRole) => {
+  // LOGIN
+  login: async (userCredObjWithRole) => {
 
-        const { role, ...userCredObj } = userCredObjWithRole
+    const { role, ...userCredObj } = userCredObjWithRole;
 
-        try {
+    try {
 
-            set({
-                loading: true,
-                error: null
-            })
+      set({
+        loading: true,
+        error: null
+      });
 
-            let res = await axios.post(
-                `${API_BASE}/common-api/login`,
-                userCredObj,
-                { withCredentials: true }
-            )
+      const res = await axios.post(
+        `${API_BASE}/common-api/login`,
+        userCredObj,
+        { withCredentials: true }
+      );
 
-            set({
-                loading: false,
-                isAuthenticated: !!res.data.payload,
-                currentUser: res.data.payload
-            })
+      set({
+        currentUser: res.data.payload,
+        loading: false,
+        error: null
+      });
 
-        } catch (err) {
+      return true;
 
-            set({
-                loading: false,
-                error: err,
-                isAuthenticated: false,
-                currentUser: null
-            })
+    } catch (err) {
 
-        }
+      set({
+        currentUser: null,
+        loading: false,
+        error: err
+      });
 
-    },
-
-    // LOGOUT
-    logout: async () => {
-
-        try {
-
-            set({
-                loading: true,
-                error: null
-            })
-
-            await axios.get(
-                `${API_BASE}/common-api/logout`,
-                { withCredentials: true }
-            )
-
-            set({
-                loading: false,
-                currentUser: null,
-                isAuthenticated: false
-            })
-
-        } catch (err) {
-
-            set({
-                loading: false,
-                error: err,
-                isAuthenticated: false,
-                currentUser: null
-            })
-
-        }
-
-    },
-
-    // CHECK AUTH
-    checkAuth: async () => {
-
-        try {
-
-            set({
-                loading: true,
-                error: null
-            })
-
-            const res = await axios.get(
-                `${API_BASE}/common-api/check-auth?t=${Date.now()}`,
-                { withCredentials: true }
-            )
-
-            set({
-                loading: false,
-                currentUser: res.data.payload,
-                isAuthenticated: !!res.data.payload
-            })
-
-        } catch (err) {
-
-            set({
-                loading: false,
-                error: err,
-                isAuthenticated: false,
-                currentUser: null
-            })
-
-        }
+      return false;
 
     }
 
-}))
+  },
+
+  // LOGOUT
+  logout: async () => {
+
+    try {
+
+      await axios.get(
+        `${API_BASE}/common-api/logout`,
+        { withCredentials: true }
+      );
+
+    } catch (err) {
+
+      console.log(err);
+
+    }
+
+    set({
+      currentUser: null,
+      loading: false,
+      error: null
+    });
+
+  },
+
+  // CHECK AUTH
+  checkAuth: async () => {
+
+    try {
+
+      set({
+        loading: true,
+        error: null
+      });
+
+      const res = await axios.get(
+        `${API_BASE}/common-api/check-auth`,
+        { withCredentials: true }
+      );
+
+      set({
+        currentUser: res.data.payload,
+        loading: false,
+        error: null
+      });
+
+    } catch (err) {
+
+      set({
+        currentUser: null,
+        loading: false,
+        error: err
+      });
+
+    }
+
+  }
+
+}));
